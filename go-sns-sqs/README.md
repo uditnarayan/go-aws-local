@@ -10,19 +10,22 @@ Clean the project, removes any existing docker infrastructure and deletes the bi
 $ make clean
 ```
 
-Initialize the project, downloads the go dependencies and creates the binary
+Initialize the project, downloads the go dependencies, build proto file and creates the binary
 ```shell
 $ make
 ```
 
-Create the resources and initialize the consumer. This will create an sns topic, a sqs queue which subscribes 
-to that sns topic. Then the consumer process will be initiated, which will listen to sqs queue and prints the messages
-received.
+Initializes the localstack aws container. This will create a sns topic, a sqs queue which subscribes to that sns topic.
+```shell
+$ make aws
+```
+
+Open a new terminal and run the following command. It initializes the consumer which will listen to sqs queue and displays the messages published.
 ```shell
 $ make poll
 ```
 
-Open a new terminal and push the events to sns. The producer will generate some random events and publish them to sns.
+Open a new terminal and run the following command. The producer will generate some random events and publish them to sns.
 ```shell
 $ make push
 ```

@@ -9,13 +9,14 @@ import (
 
 type SnsActor struct {
 	SnsClient *sns.Client
+	TopicArn  string
 }
 
-func (actor SnsActor) Publish(ctx context.Context, topicArn string, message string) error {
-	publishInput := sns.PublishInput{TopicArn: aws.String(topicArn), Message: aws.String(message)}
-	_, err := actor.SnsClient.Publish(ctx, &publishInput)
+func (actor SnsActor) Publish(ctx context.Context, message string) error {
+	publishInput := &sns.PublishInput{TopicArn: aws.String(actor.TopicArn), Message: aws.String(message)}
+	_, err := actor.SnsClient.Publish(ctx, publishInput)
 	if err != nil {
-		log.Printf("Couldn't publish message to topic %v. Here's why: %v", topicArn, err)
+		log.Printf("Failed to publish message to topic %v. Here's why: %v", actor.TopicArn, err)
 		return err
 	}
 	return nil

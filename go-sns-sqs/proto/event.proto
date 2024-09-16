@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package go_sns_sqs;
+
+option go_package = "actions/event";
+
+message Payload {
+  string username = 1;
+  string first_name = 2;
+  string last_name = 3;
+}
+
+message Event {
+  string id = 1;
+  string timestamp = 2;
+  string event_name = 3;
+
+  Payload payload = 4;
+}
+

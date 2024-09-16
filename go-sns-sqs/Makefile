@@ -1,14 +1,17 @@
 init:
-	go build
+	go install
+	protoc -I=. --go_out=. ./proto/event.proto
 
 clean:
 	docker-compose down
 	rm -f go-sns-sqs
+	rm -rf volume
+
+aws:
+	docker-compose up
 
 poll:
-	docker-compose up -d
-	sh -f init.sh
-	./go-sns-sqs poll
+	go run main.go poll
 
 push:
-	./go-sns-sqs push
+	go run main.go push
