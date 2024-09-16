@@ -1,7 +1,7 @@
 # go-sns-sqs
 
 This project aims at creating a pub sub design using aws sns and sqs. The producer publishes an event to sns topic. The 
-consumer subscribes to that topic using sqs and listen to those events.
+consumer subscribes to that topic using sqs and listen to those events. The events will be encoded using protobuf.
 
 ## how to run
 
