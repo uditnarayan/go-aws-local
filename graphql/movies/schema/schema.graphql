@@ -1,0 +1,28 @@
+schema {
+    query: Query
+}
+
+type Query {
+    hello: String!
+    movie(id: Int!): Movie
+    movieFromTitle(title: String!): Movie
+    #movies: [Movie]
+}
+
+type Person {
+    firstName: String
+    lastName: String
+}
+
+type Movie {
+    id: Int!
+    title: String!
+    director: Person
+    actors: [Person]
+    genres: [String!]
+    plot: String
+    country: String
+    language: String
+    rating: Float
+    year: Int
+}

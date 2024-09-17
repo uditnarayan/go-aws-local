@@ -1,6 +1,7 @@
 package main
 
 import (
+	"graphql/movies"
 	"log"
 	"net/http"
 
@@ -20,5 +21,12 @@ func main() {
     `
 	schema := graphql.MustParseSchema(s, &query{})
 	http.Handle("/query", &relay.Handler{Schema: schema})
+
+	moviesHandler, err := movies.NewHandler()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	http.Handle("/movies", moviesHandler.RelayHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
