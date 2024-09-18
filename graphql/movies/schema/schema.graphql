@@ -1,12 +1,13 @@
 schema {
     query: Query
+    mutation: Mutation
 }
 
 type Query {
     hello: String!
     movie(id: Int!): Movie
     movieFromTitle(title: String!): Movie
-    #movies: [Movie]
+    movies: [Movie]
 }
 
 type Person {
@@ -25,4 +26,14 @@ type Movie {
     language: String
     rating: Float
     year: Int
+}
+
+input MovieInput {
+    title: String!
+    country: String
+    language: String
+}
+
+type Mutation {
+    createMovie(input: MovieInput): Movie
 }
